@@ -1,7 +1,9 @@
 /**
- * Created by https://github.com/maynagashev on 24.11.2016.
+ * Solution created by https://github.com/maynagashev on 24.11.2016.
  */
 /*
+ # Task
+
  Return a function that takes a list of valid users, and returns a function that returns true if all of the supplied users exist in the original list of users.
 
  You only need to check that the ids match.
