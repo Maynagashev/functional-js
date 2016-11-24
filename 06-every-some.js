@@ -37,7 +37,7 @@ function checkUsersValid(goodUsers) {
         return submittedUsers.every(function (submittedUser) {
             // ... if it found at least once in goodUser
             return goodUsers.some(function (goodUser) {
-                return goodUser.id === submittedUser.id;
+                return goodUser.id === submittedUser.id || undefined;
             });
         });
     };
