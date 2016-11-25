@@ -32,7 +32,7 @@ console.log(countWords(inputWords))
 function countWords(inputWords) {
    return inputWords.reduce(function (t, c) {
        t[c] = (t[c]) ? t[c]+1 : 1;
-       // t[c] = ++t[c] || 1;  // from example
+       // t[c] = ++t[c] || 1; // variant #2
        return t;
    }, {});
 }
