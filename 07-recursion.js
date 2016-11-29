@@ -50,7 +50,13 @@ reduce([1,2,3], function(prev, curr, index, arr) {
 * */
 
 function reduce(arr, fn, initial) {
-
+    
+    function reduceInner(prev, index) {
+        if (index>=arr.length) return prev;
+        var curr = fn(prev, arr[index], index, arr);
+        return reduceInner(curr, ++index);
+    }
+    return reduceInner(initial, 0);
 }
 
 module.exports = reduce
