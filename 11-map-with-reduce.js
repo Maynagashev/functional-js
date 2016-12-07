@@ -31,5 +31,19 @@
  */
 
 module.exports = function arrayMap(arr, fn) {
-    // SOLUTION GOES HERE
+    var reduce_callback = function(acc, cur, ind, src_arr){
+        acc.push(fn(cur, ind, src_arr));
+        return acc;
+    };
+    return arr.reduce(reduce_callback, []);
 }
+
+/*
+official solution
+ module.exports = function arrayMap(arr, fn, thisArg) {
+ return arr.reduce(function(acc, item, index, arr) {
+ acc.push(fn.call(thisArg, item, index, arr))
+ return acc
+ }, [])
+ }
+ */
