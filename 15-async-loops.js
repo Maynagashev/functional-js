@@ -43,10 +43,15 @@
 
 function loadUsers(userIds, load, done) {
     var users = []
-    for (var i = 0; i < userIds.length; i++) {
-        users.push(load(userIds[i]))
-    }
-    return users
+    userIds.forEach(function(id, index){
+        // load and set callback
+        load(id, function(user) {
+            users[index] = user;
+            if (users.length===userIds) {
+                return done(users);
+            }
+        });
+    });
 }
 
 module.exports = loadUsers
