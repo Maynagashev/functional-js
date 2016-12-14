@@ -40,20 +40,34 @@
 
  * */
 
-function getDependencies(tree, initVal) {
-    console.log(tree, '----');
-    initVal = (!initVal) ? [] : initVal;
-    if (!tree || !tree.dependencies) return initVal;
-    
-    //console.log(Object.keys(tree.dependencies));
-    var ret = Object.keys(tree.dependencies).reduce(function(res, branchName) {
-        res.push(branchName+'@'+tree.dependencies[branchName].version);
-        initVal = getDependencies(tree.branchName, res);
-       return res;
-    }, initVal);
-    console.log(ret);
+function getDependencies(tree, res) {
+
+    res = (!res) ? [] : res;
+    if (!tree || !tree.dependencies) return res;
+
+    var ret = Object.keys(tree.dependencies).reduce(function(acc, branchName) {
+        var newItem = branchName + '@' + tree.dependencies[branchName].version;
+        if (acc.indexOf(newItem) === -1) acc.push(newItem);
+        return getDependencies(tree.dependencies[branchName], acc);
+    }, res);
 
     return ret.sort();
 }
 
 module.exports = getDependencies
+
+
+/* official solution
+function getDependencies(mod, result) {
+    result = result || []
+    var dependencies = mod && mod.dependencies || []
+    Object.keys(dependencies).forEach(function(dep) {
+        var key = dep + '@' + mod.dependencies[dep].version
+        if (result.indexOf(key) === -1) result.push(key)
+        getDependencies(mod.dependencies[dep], result)
+    })
+    return result.sort()
+}
+
+ module.exports = getDependencies
+ */
